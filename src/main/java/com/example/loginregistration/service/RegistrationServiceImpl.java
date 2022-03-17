@@ -22,13 +22,13 @@ public class RegistrationServiceImpl implements RegistrationService{
     }
 
     @Override
-    public User fetchUserByEmailId(String email) {
-       return registrationRepository.findByEmailId(email);
+    public User findByEmail(String email) {
+       return registrationRepository.findByEmail(email);
     }
 
     @Override
-    public User fetchUserByEmailIdAndPassword(String email, String password) {
-        return registrationRepository.findByEmailIdAAndPassword(email,password);
+    public User findByEmailAndPassword(String email, String password) {
+        return registrationRepository.findByEmailAndPassword(email,password);
     }
 
 }

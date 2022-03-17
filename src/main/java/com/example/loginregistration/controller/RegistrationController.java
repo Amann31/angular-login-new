@@ -4,10 +4,12 @@ package com.example.loginregistration.controller;
 import com.example.loginregistration.model.User;
 import com.example.loginregistration.service.RegistrationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class RegistrationController {
 
@@ -24,7 +26,7 @@ public class RegistrationController {
         String tempEmailId = user.getEmail();
         if(tempEmailId != null && !"".equals(tempEmailId))
         {
-            User userObj = registrationService.fetchUserByEmailId(tempEmailId);
+            User userObj = registrationService.findByEmail(tempEmailId);
             if(userObj != null)
             {
                 throw new Exception("User with " +tempEmailId+ " already exists");
@@ -43,7 +45,7 @@ public class RegistrationController {
         User userObj = null;
         if(tempEmailId !=null && tempPass != null )
         {
-            userObj =registrationService.fetchUserByEmailIdAndPassword(tempEmailId,tempPass);
+            userObj =registrationService.findByEmailAndPassword(tempEmailId,tempPass);
         }
         if(userObj == null) {
             throw new Exception("Wrong Credentials!");
